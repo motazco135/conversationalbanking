@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: conversational-banking
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+    typesafe:
+      api-key: ${TYPESAFE_API_KEY}
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/conversational_banking}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      password: ${SPRING_DATA_REDIS_PASSWORD:admin}
+      repositories:
+        enabled: false
+
+conversation:
+  redis:
+    ttl-seconds: 86400
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor:
+                SimpleLoggerAdvisor: trace
+pushover:
+  api-key: ${PUSHOVER_API_KEY}
+  user-key: ${PUSHOVER_USER_KEY}
